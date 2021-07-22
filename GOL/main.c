@@ -3,6 +3,7 @@
 #include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <SDL2/SDL.h>
 
 
 int round_test(Matrix m, size_t x, size_t y)
@@ -121,7 +122,8 @@ Matrix Game_Of_Life(Matrix m)
 
 int main(void)
 {
-
+    if(0 != SDL_Init(SDL_INIT_TIMER))
+        errx(1,"Initialisation of SDL_INIT_TIMER failed");
     
 
     Matrix m = new_mat(5,5);
@@ -136,9 +138,7 @@ int main(void)
     free_mat(m);
 
     
-
+    SDL_Quit();
+    
     return 0;
-
 }
-
-

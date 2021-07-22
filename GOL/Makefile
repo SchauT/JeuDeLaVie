@@ -1,18 +1,23 @@
 #Makefile
 
-CC = gcc
+CC ?= gcc
 CFLAGS = -Wall -Wextra -Werror -std=c99
+SDL_FLAGS = -lSDL2 -lGL
 
-OBJ = main.o matrix.o
-DEP = ${OBJ:.o=.d}
+OBJS = main.o matrix.o
+BIN = main
 
-ALL: main
+all: $(OBJS)
+	$(CC) $^ -o main $(CFLAGS) $(SDL_FLAGS)
 
-main: ${OBJ}
+$(BIN): $(OBJS)
 
 clean:
-	${RM} ${OBJ} ${DEP} *~
+	${RM} ${OBJS} ${DEP} *~
 	${RM} main
+
+cleanrun: clean
+	make all
 
 -include ${DEP}
 
