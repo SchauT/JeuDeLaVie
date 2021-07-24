@@ -7,13 +7,17 @@
 Matrix new_mat(size_t width, size_t height)
 {
     size_t size = width * height;
-    if (size == 0) errx(1,"Wrong values for sizes: size = 0");
+    if (size == 0)
+        errx(1,"Wrong values for sizes: size = 0");
+
     int* m =(int *) calloc(size,sizeof(int));
-    if (m==NULL) errx(1,"Calloc returned NULL");
+
+    if (m==NULL)
+        errx(1,"Calloc returned NULL");
+
     Matrix matrix = {width, height, m};
     
     return matrix;
-
 }
 
 int mat_get(Matrix m, size_t x, size_t y)

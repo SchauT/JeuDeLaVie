@@ -36,11 +36,19 @@ SDL_Renderer* CreateRenderer(SDL_Window *window)
     return renderer;
 }
 
+void CursedColor(SDL_Renderer *renderer)
+{
+    SDL_SetRenderDrawColor(renderer, rand() % 255, rand() % 255, rand() % 255, 255); 
+}
+
 void DrawPoint(SDL_Renderer *renderer, size_t x, size_t y)
 {
     for(size_t i = y; i < y+PIXSIZE; i++)
         for(size_t j = x; j < x+PIXSIZE; j++)
+        {
+            //CursedColor(renderer); // cringe
             SDL_RenderDrawPoint(renderer, j, i);
+        }
 }
 
 void DrawMatrix(SDL_Renderer *renderer, Matrix m)
@@ -58,7 +66,10 @@ void DrawMatrix(SDL_Renderer *renderer, Matrix m)
         for(size_t x = 0; x < m.cols; x++)
         {
             if(m.values[y*m.cols+x] == 1)
+            {
+                CursedColor(renderer); // cricricriiiiiinge
                 DrawPoint(renderer, x*PIXSIZE, y*PIXSIZE);
+            }
         }
     }
 
