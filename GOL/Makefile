@@ -1,10 +1,10 @@
 #Makefile
 
 CC ?= gcc
-CFLAGS = -Wall -Wextra -Werror -std=c99
+CFLAGS = -Wall -Wextra -std=c99 #-Werror
 SDL_FLAGS = -lSDL2 -lGL
 
-OBJS = main.o matrix.o
+OBJS = main.o matrix.o sdl.o
 BIN = main
 
 all: $(OBJS)

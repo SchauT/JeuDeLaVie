@@ -17,6 +17,4 @@ void draw_m(Matrix m);
 void free_mat(Matrix m);
 
 
-
-
 #endif

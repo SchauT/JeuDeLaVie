@@ -16,17 +16,19 @@ Matrix new_mat(size_t width, size_t height)
 
 }
 
-int  mat_get(Matrix m, size_t x, size_t y)
+int mat_get(Matrix m, size_t x, size_t y)
 {
-    if(x>=m.cols || y>=m.rows) errx(1,"Can't get value : Coordinates not in matrix");
-    size_t v_co = y*m.cols+x;
+    if(x >= m.cols || y >= m.rows)
+        errx(1,"mat_get: Coordinates not in matrix");
 
-    return m.values[v_co];  
+    return m.values[y*m.cols+x];  
 }
 
 void mat_put(Matrix m, size_t x, size_t y, int d)
 {
-   if(x>= m.cols || y>= m.rows) errx(1,"Can't put value : Coordinates not in matrix"); 
+   if(x >= m.cols || y >= m.rows)
+       errx(1,"mat_put: Coordinates not in matrix");
+
    m.values[y*m.cols+x] = d;
 }
 
@@ -36,18 +38,12 @@ int round_check(Matrix m, size_t x, size_t y)
 {
     int LN = 0;
 
-    for (size_t i = y-1; i <= y+1;i++)
-    {
-        for(size_t j = x-1 ; j<=x+1;j++)
-        {
-         if(!(i==y && j == x))
-         {
-            LN+=mat_get(m,i,j);
-         }
-        }
-    }
-    return LN;
-    
+    for (size_t i = y-1; i <= y+1; i++)
+        for(size_t j = x-1 ; j<=x+1; j++)
+            if(!(i == y && j == x))
+                LN += mat_get(m,j,i);
+
+    return LN; 
 }
 
 
